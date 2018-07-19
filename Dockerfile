@@ -40,9 +40,13 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     shasum -a256 -c /tmp/rundeck-slack-plugin.sig && \
     cd - && \
     apt-get -qqy install python3.6 && \
-    pip install awscli --upgrade && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && \
+    apt-get install -y python-pip && \
+    pip install awscli && \
+    apt-get clean
 
 ADD content/ /
 RUN chmod u+x /opt/run && \
