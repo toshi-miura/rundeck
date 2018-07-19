@@ -1,6 +1,8 @@
 # Dockerfile for rundeck
 # https://github.com/jjethwa/rundeck
 
+# add awscli && python
+
 FROM debian:stretch
 
 MAINTAINER Jordan Jethwa
