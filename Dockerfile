@@ -43,7 +43,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && \
+RUN echo "---------------------------------------------" && \
+    apt-get update && \
     apt-get install -y python-pip && \
     pip install awscli && \
     apt-get clean
