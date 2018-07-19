@@ -40,8 +40,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     shasum -a256 -c /tmp/rundeck-slack-plugin.sig && \
     cd - && \
     apt-get -qqy install python3.6 && \
-    curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" && \
-    python get-pip.py && \
+    pip install awscli --upgrade && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
