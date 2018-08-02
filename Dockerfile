@@ -15,6 +15,7 @@ ENV SERVER_URL=https://localhost:4443 \
     JAAS_CONF_FILE=jaas-loginmodule.conf \
     KEYSTORE_PASS=adminadmin \
     TRUSTSTORE_PASS=adminadmin \
+    TZ=Asia/Tokyo \
     CLUSTER_MODE=false
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
