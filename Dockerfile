@@ -48,6 +48,7 @@ RUN echo "---------------------------------------------" && \
     apt-get update && \
     apt-get install -y python-pip && \
     pip install awscli && \
+    pip install boto3 && \
     apt-get clean
 
 ADD content/ /
