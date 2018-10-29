@@ -52,6 +52,9 @@ RUN echo "---------------------------------------------" && \
     apt-get clean
 
 ADD content/ /
+ADD conf/rundeck-slack-incoming-webhook-plugin/ /etc/rundeck
+
+
 RUN chmod u+x /opt/run && \
     mkdir -p /var/log/supervisor && mkdir -p /opt/supervisor && \
     chmod u+x /opt/supervisor/rundeck && chmod u+x /opt/supervisor/mysql_supervisor && chmod u+x /opt/supervisor/fatalservicelistener
