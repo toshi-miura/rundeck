@@ -1,12 +1,8 @@
 # Dockerfile for rundeck
 # https://github.com/jjethwa/rundeck
-
 # add awscli && python
-
 FROM debian:stretch
-
 MAINTAINER Jordan Jethwa
-
 ENV SERVER_URL=https://localhost:4443 \
     RUNDECK_STORAGE_PROVIDER=file \
     RUNDECK_PROJECT_STORAGE_TYPE=file \
@@ -17,7 +13,6 @@ ENV SERVER_URL=https://localhost:4443 \
     TRUSTSTORE_PASS=adminadmin \
     TZ=Asia/Tokyo \
     CLUSTER_MODE=false
-
 RUN export DEBIAN_FRONTEND=noninteractive && \
     echo "deb http://ftp.debian.org/debian stretch-backports main" >> /etc/apt/sources.list && \
     apt-get -qq update && \
@@ -43,24 +38,18 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qqy install python3.6 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
 RUN echo "---------------------------------------------" && \
     apt-get update && \
     apt-get install -y python-pip && \
     pip install awscli && \
     pip install boto3 && \
-    apt-get clean
-
+    apt-get clean && \
+    pip install elasticsearch-curator
 ADD content/ /
 ADD conf/rundeck-slack-incoming-webhook-plugin/ /etc/rundeck
-
-
 RUN chmod u+x /opt/run && \
     mkdir -p /var/log/supervisor && mkdir -p /opt/supervisor && \
     chmod u+x /opt/supervisor/rundeck && chmod u+x /opt/supervisor/mysql_supervisor && chmod u+x /opt/supervisor/fatalservicelistener
-
 EXPOSE 4440 4443
-
 VOLUME  ["/etc/rundeck", "/var/rundeck", "/var/lib/rundeck", "/var/lib/mysql", "/var/log/rundeck", "/opt/rundeck-plugins", "/var/lib/rundeck/logs", "/var/lib/rundeck/var/storage"]
-
 ENTRYPOINT ["/opt/run"]
